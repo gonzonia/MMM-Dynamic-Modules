@@ -7,7 +7,7 @@ MMM-Dynamic-Modules moves modules without need to restart Magic Mirror. Module a
 
 ```bash
 cd ~/MagicMirror/modules
-git clone https://github.com/Toreke/MMM-Dynamic-Modules.git
+git clone https://github.com/gonzonia/MMM-Dynamic-Modules.git
 ```
 
 Config:
