@@ -77,3 +77,27 @@ LandscapeConfig: '{"newsfeed":{"position": "bottom_bar","visible": true},"MMM-Ne
 
 Order of the modules matters. If there is multiple modules in the same position, first module will be top, second module under it, and so on.
 If multiple instances of a module are being used, they will ALL be moved or hidden. 
+
+Tips:
+Best when used in conjunction with CSS. 
+Use
+'''
+@media (orientation: landscape) { 
+
+}
+'''
+and 
+'''
+@media (orientation: portrait) {
+
+}
+
+to create stylesheets for specific screen orientations. 
+
+You can also add 
+
+'''
+and (max-width: 3840px) 
+''' 
+to either one if you want to create something that is for 4K. This would come in handy if say your main mirror is 1080p but you want to have a separate browser somewhere else showing the mirror on a TV or higher resolution monitor. 
+
