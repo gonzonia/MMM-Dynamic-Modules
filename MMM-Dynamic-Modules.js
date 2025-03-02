@@ -6,7 +6,8 @@ Module.register(DynModuleName,{
 		swapOrientation : false, 
 		swapPayload : "",
 		LandscapeConfig: "",
-		PortraitConfig: ""
+		PortraitConfig: "",
+		UpdateNotifications: "DOM_OBJECTS_CREATED"
 	},
 	loaded: function(callback) {
 		//this.finishLoading();
@@ -23,8 +24,9 @@ Module.register(DynModuleName,{
 	},
 	notificationReceived(notification, payload, sender) {
 		// Hook to turn off messages about notiofications, clock once a second
-		
-		if (this.config.swapOrientation && (notification === 'DOM_OBJECTS_CREATED')){
+		 
+		 this.config.UpdateNotifications = this.config.UpdateNotifications + ",DOM_OBJECTS_CREATED"
+		if (this.config.swapOrientation && (this.config.UpdateNotifications.includes(notification))){
 			Log.info("Notification Recieved in MMM-Dynamic-Modules:" + notification);
 		//	Log.info("MMM-Dynamic-Modules SCREEN ORIENTATION = " + screen.orientation.type);
 			
@@ -34,14 +36,17 @@ Module.register(DynModuleName,{
 			
 					Log.info("Attempting to set positions: " + this.config.LandscapeConfig);
 				}
-				this.setPositions(JSON.parse(JSON.parse(JSON.stringify(this.config.LandscapeConfig))));	
+				
+				this.setPositions(JSON.parse(this.config.LandscapeConfig));	
 					
 			}
+			
 			if(screen.orientation.type.includes("portrait")){
 					if(this.config.debug){
-					Log.info("MMM-Dynamic-Modules Portrait ORIENTATION");
-					Log.info("Attempting to set positions: " + this.config.PortraitConfig);
-				}						
+						Log.info("MMM-Dynamic-Modules Portrait ORIENTATION");
+						Log.info("Attempting to set positions: " + this.config.PortraitConfig);
+					}	
+				this.setPositions(JSON.parse(JSON.stringify(this.config.PortraitConfig)));						
 			}
 		}
 
@@ -86,19 +91,23 @@ Module.register(DynModuleName,{
 						
 						var split_position = values[i].position.split("_");
 						//var selected_module = document.getElementById(id);
-						var region = document.querySelector('div.region.' + split_position[0] + '.' + split_position[1] + ' div.container');
-						
-						// Make sure the region is visible
-						//ONLY CHANGE IF EXPLICITLY TOLD TO
-						if(values[i].visible==true){
-							if (region.style.display === 'none') {
-								region.style.display = 'block';
-							}
-							
-						}else if (values[i].visible==false){
-							region.style.display = 'none'
+						if(mod_config.debug){
+							Log.log(split_position[0] + ";" + split_position[1]);
 						}
 
+						var region = document.querySelector('div.region.' + split_position[0] + '.' + split_position[1] + ' div.container');
+						
+						if(mod_config.debug){
+							Log.log(region);
+						}
+						
+						// Make sure the region is visible, so we can append
+						if (region.style.display === 'none') {
+								region.style.display = 'block';
+						}
+							
+					
+					
 						// Move module
 						region.appendChild(selected_module);
 
