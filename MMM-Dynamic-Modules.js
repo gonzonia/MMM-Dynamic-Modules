@@ -4,7 +4,6 @@ const DynModuleName = "MMM-Dynamic-Modules";
 Module.register(DynModuleName,{
 	defaults: {
 		swapOrientation : false, 
-		swapPayload : "",
 		LandscapeConfig: "",
 		PortraitConfig: "",
 		UpdateNotifications: "DOM_OBJECTS_CREATED"
