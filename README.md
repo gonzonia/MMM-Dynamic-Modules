@@ -1,3 +1,5 @@
+Orginal module by Toreke (https://github.com/Toreke/)
+
 # Magic Mirror² Module: MMM-Dynamic-Modules
 
 MMM-Dynamic-Modules moves modules without need to restart Magic Mirror. Module also allows to hide or show modules. Module has method to change configured positions back.
