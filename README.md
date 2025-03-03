@@ -4,6 +4,15 @@ Orginal module by Toreke (https://github.com/Toreke/)
 
 MMM-Dynamic-Modules moves modules without need to restart Magic Mirror. Module also allows to hide or show modules. Module has method to change configured positions back.
 Can also dynamically adjust based on screen orientation and update based on notifications received that aren't sent specifically to the module.  
+## Example
+These use the same config file and only minimal changes to CSS for landscape. My primary screen that's on all the time is in portrait. The clock and MMM-BMW-PW was shifted from top_bar to upper_third. 
+The newsfeed was moved from bottom_left to bottom_bar. MMM-News-QR was moved from bottom_right to bottom_bar. 
+PORTRAIT:
+![Screenshot portrait](https://github.com/user-attachments/assets/9b0fc219-1092-4e34-8685-342ec2f9726c)
+
+LANDSCAPE:
+![Screenshot landscape](https://github.com/user-attachments/assets/90419c13-bf48-43ba-a245-47416667017e)
+
 
 ## Installation
 
