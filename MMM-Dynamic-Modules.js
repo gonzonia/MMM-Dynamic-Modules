@@ -1,12 +1,14 @@
 const DynModuleName = "MMM-Dynamic-Modules";
-
+const ScreenActive = true;
 
 Module.register(DynModuleName,{
 	defaults: {
 		swapOrientation : false, 
 		LandscapeConfig: "",
 		PortraitConfig: "",
-		UpdateNotifications: "DOM_OBJECTS_CREATED"
+		UpdateNotifications: "DOM_OBJECTS_CREATED",
+		PauseNotifications: "",
+		ResumeNotifications:""
 	},
 	loaded: function(callback) {
 		//this.finishLoading();
@@ -23,38 +25,50 @@ Module.register(DynModuleName,{
 	},
 	notificationReceived(notification, payload, sender) {
 		// Hook to turn off messages about notiofications, clock once a second
-		 
-		 this.config.UpdateNotifications = this.config.UpdateNotifications + ",DOM_OBJECTS_CREATED"
-		if (this.config.swapOrientation && (this.config.UpdateNotifications.includes(notification))){
-			Log.info("Notification Recieved in MMM-Dynamic-Modules:" + notification);
-		//	Log.info("MMM-Dynamic-Modules SCREEN ORIENTATION = " + screen.orientation.type);
-			
-			if(screen.orientation.type.includes("landscape")){
-				if(this.config.debug){
-					Log.info("MMM-Dynamic-Modules LANDSCAPE ORIENTATION");
-			
-					Log.info("Attempting to set positions: " + this.config.LandscapeConfig);
-				}
+		if ResumeNotifications.includes(notification){
+			ScreenActive = true;
+			}
+		if PauseNotifications.includes(notification{
+			ScreenActive= false;
+			}
+
+		this.config.UpdateNotifications = this.config.UpdateNotifications + ",DOM_OBJECTS_CREATED"
+		
+		//Only process when not paused
+		if(ScreenActive){
+			if (this.config.swapOrientation && (this.config.UpdateNotifications.includes(notification))){
+				Log.info("Notification Recieved in MMM-Dynamic-Modules:" + notification);
 				
-				this.setPositions(JSON.parse(this.config.LandscapeConfig));	
-					
-			}
-			
-			if(screen.orientation.type.includes("portrait")){
+				Log.info("MMM-Dynamic-Modules SCREEN ORIENTATION = " + screen.orientation.type);
+				Log.info("MMM-Dynamic-Modules SCREEN VISIBLE = " + document.visibilityState);
+				
+				if(screen.orientation.type.includes("landscape") && ScreenActive == true){
 					if(this.config.debug){
-						Log.info("MMM-Dynamic-Modules Portrait ORIENTATION");
-						Log.info("Attempting to set positions: " + this.config.PortraitConfig);
-					}	
-				this.setPositions(JSON.parse(JSON.stringify(this.config.PortraitConfig)));						
+						Log.info("MMM-Dynamic-Modules LANDSCAPE ORIENTATION");
+				
+						Log.info("Attempting to set positions: " + this.config.LandscapeConfig);
+					}
+					
+					this.setPositions(JSON.parse(this.config.LandscapeConfig));	
+						
+				}
+			
+				if(screen.orientation.type.includes("portrait") ScreenActive == true){
+						if(this.config.debug){
+							Log.info("MMM-Dynamic-Modules Portrait ORIENTATION");
+							Log.info("Attempting to set positions: " + this.config.PortraitConfig);
+						}	
+					this.setPositions(JSON.parse(JSON.stringify(this.config.PortraitConfig)));						
+				}
 			}
-		}
-
-		if(notification === 'CHANGE_POSITIONS'){
-			this.setPositions(payload);
-		}
-
-		if(notification === 'CHANGE_POSITIONS_DEFAULTS'){
-			this.setDefaults();
+	
+			if(notification === 'CHANGE_POSITIONS'){
+				this.setPositions(payload);
+			}
+	
+			if(notification === 'CHANGE_POSITIONS_DEFAULTS'){
+				this.setDefaults();
+			}
 		}
 	},
 	

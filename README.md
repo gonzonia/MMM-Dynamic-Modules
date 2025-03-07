@@ -29,11 +29,12 @@ The entry in `config.js` can include the following options:
 <!-- prettier-ignore-start -->
 | Option             | Description
 |--------------------|-----------
-| `swapOrientation`  | true or false, whether to move modules based on the screen orientation
-| `LandscapeConfig`  | JSON string for moving/hiding when in landscape
-| `PortraitConfig`   | JSON string for moving/hiding when in portrait
-| `UpdateNotifications`| List of notifications that will trigger the update based on orientaton. Will always include the system, "DOM_OBJECTS_CREATED"
-
+| `swapOrientation`  | true or false, whether to move modules based on the screen orientation Default: False
+| `LandscapeConfig`  | JSON string for moving/hiding when in landscape Default: ""
+| `PortraitConfig`   | JSON string for moving/hiding when in portrait Default: ""
+| `UpdateNotifications`| List of notifications that will trigger the update based on orientation. Will always include the system, "DOM_OBJECTS_CREATED" Default: "DOM_OBJECTS_CREATED"
+| `PauseNotifications`| List of notifications that will pause updates (i.e. some modules used to turn off the screen also end up switching to landscape from portrait) Default: ""
+| `ResumeNotifications`| List of notifications that will resume updates (needed if using pause notifications to make sure screen is updated again) Default: ""
 
 ```
 {
