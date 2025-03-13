@@ -25,11 +25,12 @@ Module.register(DynModuleName,{
 	},
 	notificationReceived(notification, payload, sender) {
 		// Hook to turn off messages about notiofications, clock once a second
-		if ResumeNotifications.includes(notification){
-			ScreenActive = true;
+		
+		if (ResumeNotifications.includes(notification)){
+				ScreenActive = true;
 			}
-		if PauseNotifications.includes(notification{
-			ScreenActive= false;
+		if (PauseNotifications.includes(notification)){
+				ScreenActive= false;
 			}
 
 		this.config.UpdateNotifications = this.config.UpdateNotifications + ",DOM_OBJECTS_CREATED"
@@ -53,7 +54,7 @@ Module.register(DynModuleName,{
 						
 				}
 			
-				if(screen.orientation.type.includes("portrait") ScreenActive == true){
+				if(screen.orientation.type.includes("portrait") && ScreenActive == true){
 						if(this.config.debug){
 							Log.info("MMM-Dynamic-Modules Portrait ORIENTATION");
 							Log.info("Attempting to set positions: " + this.config.PortraitConfig);
